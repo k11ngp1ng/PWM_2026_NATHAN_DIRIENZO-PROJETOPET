@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.CadastroPage"
+             Title="Cadastro"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F7F9F8">
+
+	<ScrollView>
+		<VerticalStackLayout Spacing="20" 
+                             Padding="30,40,30,40">
+
+			<VerticalStackLayout Spacing="5" Margin="0,0,0,15">
+				<Label Text="Criar Conta"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#3A8D7A" />
+
+				<Label Text="Seus dados para começarmos"
+                       FontSize="14"
+                       TextColor="#718096" />
+			</VerticalStackLayout>
+
+			<!-- Formulário -->
+			<VerticalStackLayout Spacing="15">
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entNome" Placeholder="Nome completo" TextColor="#263238" />
+				</Border>
+
+				<!-- NOVO CAMPO: CPF -->
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entCpf" Placeholder="CPF (somente números)" Keyboard="Numeric" MaxLength="11" TextColor="#263238" />
+				</Border>
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entEmail" Placeholder="E-mail" Keyboard="Email" TextColor="#263238" />
+				</Border>
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entTelefone" Placeholder="Telefone (WhatsApp)" Keyboard="Telephone" TextColor="#263238" />
+				</Border>
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entSenha" Placeholder="Senha" IsPassword="True" TextColor="#263238" />
+				</Border>
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entConfirmarSenha" Placeholder="Confirmar senha" IsPassword="True" TextColor="#263238" />
+				</Border>
+
+			</VerticalStackLayout>
+
+			<!-- Botões -->
+			<VerticalStackLayout Spacing="15" Margin="0,20,0,0">
+				<Button Text="CONTINUAR"
+                        BackgroundColor="#3A8D7A"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Clicked="OnContinuarClicked"/>
+
+				<Label Text="Já possuo uma conta"
+                       TextColor="#3A8D7A"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Padding="10">
+					<Label.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnVoltarLoginTapped" />
+					</Label.GestureRecognizers>
+				</Label>
+			</VerticalStackLayout>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>

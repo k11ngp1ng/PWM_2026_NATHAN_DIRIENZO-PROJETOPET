@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.AgendamentoPage"
+             BackgroundColor="#F7F9F8">
+
+	<ContentPage.Resources>
+		<ResourceDictionary>
+			<DataTemplate x:Key="HorarioTemplate">
+				<Border Stroke="{Binding CorBorda}" BackgroundColor="{Binding CorFundo}" Padding="15,10" StrokeShape="RoundRectangle 8" Margin="0,0,10,10">
+					<Label Text="{Binding HoraTexto}" TextColor="{Binding CorTexto}" FontAttributes="Bold" HorizontalOptions="Center"/>
+					<Border.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnHorarioTapped" CommandParameter="{Binding}" />
+					</Border.GestureRecognizers>
+				</Border>
+			</DataTemplate>
+		</ResourceDictionary>
+	</ContentPage.Resources>
+
+	<ScrollView>
+		<VerticalStackLayout Padding="20,40,20,40" Spacing="25">
+
+			<VerticalStackLayout Spacing="0">
+				<Label Text="Olá, Nathan!" FontSize="26" FontAttributes="Bold" TextColor="#3A8D7A"/>
+				<Label Text="O que o seu melhor amigo precisa hoje?" FontSize="14" TextColor="#718096" />
+			</VerticalStackLayout>
+
+			<!-- 1. Bloco de Pets -->
+			<VerticalStackLayout Spacing="10">
+				<Label Text="1. Selecione o Pet" FontAttributes="Bold" TextColor="#263238" FontSize="16"/>
+				<ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+					<HorizontalStackLayout Spacing="10">
+						<HorizontalStackLayout x:Name="hslPets" Spacing="10">
+							<BindableLayout.ItemTemplate>
+								<DataTemplate>
+									<Border Stroke="#E2E8F0" StrokeThickness="2" BackgroundColor="#FFFFFF" Padding="20,10" StrokeShape="RoundRectangle 8">
+										<Label Text="{Binding Nome}" FontAttributes="Bold" TextColor="#263238" VerticalOptions="Center"/>
+										<Border.GestureRecognizers>
+											<TapGestureRecognizer Tapped="OnPetTapped" CommandParameter="{Binding}" />
+										</Border.GestureRecognizers>
+									</Border>
+								</DataTemplate>
+							</BindableLayout.ItemTemplate>
+						</HorizontalStackLayout>
+						<Border Stroke="#6CB7A8" StrokeThickness="1" StrokeDashArray="4,4" BackgroundColor="Transparent" Padding="15,10" StrokeShape="RoundRectangle 8">
+							<HorizontalStackLayout Spacing="5" VerticalOptions="Center">
+								<Label Text="+" FontAttributes="Bold" TextColor="#6CB7A8"/>
+								<Label Text="Novo Pet" TextColor="#6CB7A8" FontAttributes="Bold"/>
+							</HorizontalStackLayout>
+							<Border.GestureRecognizers>
+								<TapGestureRecognizer Tapped="OnAdicionarPetTapped" />
+							</Border.GestureRecognizers>
+						</Border>
+					</HorizontalStackLayout>
+				</ScrollView>
+			</VerticalStackLayout>
+
+			<!-- 2. Bloco de Serviços -->
+			<VerticalStackLayout Spacing="10">
+				<Label Text="2. Escolha o Serviço" FontAttributes="Bold" TextColor="#263238" FontSize="16"/>
+				<VerticalStackLayout x:Name="vslServicos" Spacing="10">
+					<BindableLayout.ItemTemplate>
+						<DataTemplate>
+							<Border Stroke="#E2E8F0" StrokeThickness="2" BackgroundColor="#FFFFFF" Padding="15" StrokeShape="RoundRectangle 8">
+								<Grid ColumnDefinitions="*, Auto" RowDefinitions="Auto, Auto">
+									<Label Grid.Row="0" Grid.Column="0" Text="{Binding Servico}" FontAttributes="Bold" FontSize="16" TextColor="#263238"/>
+									<Label Grid.Row="1" Grid.Column="0" Text="{Binding Descricao}" FontSize="12" TextColor="#718096" Margin="0,2,10,0" LineBreakMode="WordWrap"/>
+									<VerticalStackLayout Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" HorizontalOptions="End" VerticalOptions="Center" Spacing="2">
+										<Label Text="{Binding PrecoCalculado, StringFormat='R$ {0:F2}'}" FontAttributes="Bold" FontSize="16" TextColor="#3A8D7A" HorizontalOptions="End"/>
+										<Label Text="{Binding DuracaoFormatada}" FontSize="12" TextColor="#718096" HorizontalOptions="End"/>
+									</VerticalStackLayout>
+								</Grid>
+								<Border.GestureRecognizers>
+									<TapGestureRecognizer Tapped="OnServicoTapped" CommandParameter="{Binding}" />
+								</Border.GestureRecognizers>
+							</Border>
+						</DataTemplate>
+					</BindableLayout.ItemTemplate>
+				</VerticalStackLayout>
+			</VerticalStackLayout>
+
+			<!-- 3. Bloco de Data -->
+			<VerticalStackLayout Spacing="10">
+				<Label Text="3. Escolha a Data" FontAttributes="Bold" TextColor="#263238" FontSize="16"/>
+				<Border Stroke="#E2E8F0" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="15,5">
+					<DatePicker x:Name="dtpData" Format="dd/MM/yyyy" TextColor="#263238" DateSelected="OnDataSelecionada" HorizontalOptions="Fill" />
+				</Border>
+			</VerticalStackLayout>
+
+			<!-- 4. Bloco de Horário (ATUALIZADO COM ABAS) -->
+			<VerticalStackLayout Spacing="10">
+				<Label Text="4. Escolha o Horário" FontAttributes="Bold" TextColor="#263238" FontSize="16"/>
+
+				<!-- Abas (Toggles) -->
+				<Grid ColumnDefinitions="*,*" ColumnSpacing="10" Margin="0,0,0,10">
+					<Border x:Name="brdAbaManha" Grid.Column="0" Stroke="#3A8D7A" BackgroundColor="#3A8D7A" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10">
+						<Label x:Name="lblAbaManha" Text="MANHÃ" TextColor="#FFFFFF" FontAttributes="Bold" HorizontalOptions="Center"/>
+						<Border.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnAbaManhaTapped" />
+						</Border.GestureRecognizers>
+					</Border>
+					<Border x:Name="brdAbaTarde" Grid.Column="1" Stroke="#E2E8F0" BackgroundColor="#FFFFFF" StrokeThickness="1" StrokeShape="RoundRectangle 8" Padding="10">
+						<Label x:Name="lblAbaTarde" Text="TARDE" TextColor="#718096" FontAttributes="Bold" HorizontalOptions="Center"/>
+						<Border.GestureRecognizers>
+							<TapGestureRecognizer Tapped="OnAbaTardeTapped" />
+						</Border.GestureRecognizers>
+					</Border>
+				</Grid>
+
+				<!-- Manhã (Visível por padrão) -->
+				<FlexLayout x:Name="flxHorariosManha" 
+                            Wrap="Wrap" Direction="Row" JustifyContent="Start" 
+                            BindableLayout.ItemTemplate="{StaticResource HorarioTemplate}" />
+
+				<!-- Tarde (Oculto por padrão) -->
+				<FlexLayout x:Name="flxHorariosTarde" 
+                            Wrap="Wrap" Direction="Row" JustifyContent="Start" 
+                            BindableLayout.ItemTemplate="{StaticResource HorarioTemplate}" 
+                            IsVisible="False" />
+			</VerticalStackLayout>
+
+			<Button Text="CONTINUAR"
+                    BackgroundColor="#3A8D7A"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    Margin="0,15,0,0"
+                    Clicked="OnConfirmarTapped"/>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.FrmPrincipal"
+             Title="VanderPet"
+             NavigationPage.HasNavigationBar="False">
+
+    <VerticalStackLayout VerticalOptions="CenterAndExpand"
+                         Padding="10">
+
+        <Label
+            Text="VanderPet"
+            FontFamily="OpenSans-Regular"
+            FontSize="40"
+            TextColor="{StaticResource Primary}"/>
+
+        <Border Padding="10">
+            <VerticalStackLayout>
+
+                <DatePicker x:Name="dtPckInicio"
+                            Format="dd/MM/yyyy"/>
+
+                <Picker x:Name="pckEspecies"
+                        Title="Especies"
+                        BindingContext="x:Reference lstEspecies"
+                        ItemDisplayBinding="{Binding Especie}"/>
+
+                <Picker x:Name="pckServicos"
+                        Title="Serviços"
+                        BindingContext="x:Reference lstServicos"
+                        ItemDisplayBinding="{Binding Servico}"/>
+
+                <Picker x:Name="pckRacas"
+                        Title="Raças"
+                        BindingContext="x:Reference lstRacas"
+                        ItemDisplayBinding="{Binding Raca}"/>
+
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>

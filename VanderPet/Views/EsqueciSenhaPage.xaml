@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.EsqueciSenhaPage"
+             Title="Recuperar Senha"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F7F9F8">
+
+	<ScrollView>
+		<VerticalStackLayout Spacing="25" 
+                             Padding="30,50,30,30">
+
+			<VerticalStackLayout Spacing="10">
+				<Label Text="Recuperar Senha"
+                       FontSize="28"
+                       FontAttributes="Bold"
+                       TextColor="#3A8D7A" />
+
+				<Label Text="Informe seu e-mail cadastrado. Enviaremos um link para você redefinir sua senha."
+                       FontSize="14"
+                       TextColor="#718096" />
+			</VerticalStackLayout>
+
+			<VerticalStackLayout Spacing="15" Margin="0,20,0,0">
+
+				<Border Stroke="#6CB7A8" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entEmail" 
+                           Placeholder="Seu e-mail" 
+                           Keyboard="Email" 
+                           TextColor="#263238" />
+				</Border>
+
+			</VerticalStackLayout>
+
+			<VerticalStackLayout Spacing="15" Margin="0,20,0,0">
+				<Button Text="ENVIAR LINK"
+                        BackgroundColor="#3A8D7A"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Clicked="OnEnviarClicked"/>
+
+				<Label Text="Voltar para o Login"
+                       TextColor="#3A8D7A"
+                       FontSize="14"
+                       FontAttributes="Bold"
+                       HorizontalOptions="Center"
+                       Padding="10">
+					<Label.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnVoltarTapped" />
+					</Label.GestureRecognizers>
+				</Label>
+			</VerticalStackLayout>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>

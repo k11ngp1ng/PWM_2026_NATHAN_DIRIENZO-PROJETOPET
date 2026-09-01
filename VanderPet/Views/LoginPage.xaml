@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.LoginPage"
+             Title="Login"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#F7F9F8">
+
+	<ScrollView>
+		<VerticalStackLayout Spacing="25" 
+                             Padding="30,50,30,30" 
+                             VerticalOptions="CenterAndExpand">
+
+			<VerticalStackLayout Spacing="10" HorizontalOptions="Center">
+				<Image Source="dotnet_bot.png" 
+                       HeightRequest="100" 
+                       WidthRequest="100"/>
+				<Label Text="VanderPet"
+                       FontSize="32"
+                       FontAttributes="Bold"
+                       TextColor="#3A8D7A"
+                       HorizontalOptions="Center" />
+
+				<Label Text="Cuidado e carinho para o seu melhor amigo"
+                       FontSize="14"
+                       TextColor="#718096"
+                       HorizontalOptions="Center" />
+			</VerticalStackLayout>
+
+			<VerticalStackLayout Spacing="15" Margin="0,30,0,0">
+
+				<Border Stroke="#6CB7A8" 
+                        StrokeThickness="1" 
+                        BackgroundColor="#FFFFFF"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="10,0">
+					<Entry x:Name="entEmail" 
+                           Placeholder="E-mail" 
+                           Keyboard="Email" 
+                           TextColor="#263238" />
+				</Border>
+
+				<Border Stroke="#6CB7A8" 
+                        StrokeThickness="1" 
+                        BackgroundColor="#FFFFFF"
+                        StrokeShape="RoundRectangle 8"
+                        Padding="10,0">
+					<Entry x:Name="entSenha" 
+                           Placeholder="Senha" 
+                           IsPassword="True" 
+                           TextColor="#263238" />
+				</Border>
+
+				<Label Text="Esqueci minha senha"
+                       TextColor="#3A8D7A"
+                       FontSize="14"
+                       HorizontalOptions="End">
+					<Label.GestureRecognizers>
+						<TapGestureRecognizer Tapped="OnEsqueciSenhaTapped" />
+					</Label.GestureRecognizers>
+				</Label>
+			</VerticalStackLayout>
+
+			<VerticalStackLayout Spacing="15" Margin="0,20,0,0">
+				<Button Text="ENTRAR"
+                        BackgroundColor="#3A8D7A"
+                        TextColor="White"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Clicked="OnEntrarClicked"/>
+
+				<Button Text="CRIAR CONTA"
+                        BackgroundColor="Transparent"
+                        TextColor="#3A8D7A"
+                        BorderColor="#3A8D7A"
+                        BorderWidth="2"
+                        FontAttributes="Bold"
+                        CornerRadius="8"
+                        HeightRequest="50"
+                        Clicked="OnCriarContaClicked"/>
+			</VerticalStackLayout>
+
+		</VerticalStackLayout>
+	</ScrollView>
+
+</ContentPage>

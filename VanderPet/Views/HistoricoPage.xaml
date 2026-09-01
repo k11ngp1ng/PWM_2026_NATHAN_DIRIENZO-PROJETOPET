@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="VanderPet.Views.HistoricoPage"
+             BackgroundColor="#F7F9F8">
+
+	<ScrollView>
+		<VerticalStackLayout Padding="20,40,20,40" Spacing="20">
+
+			<Label Text="Histórico" FontSize="26" FontAttributes="Bold" TextColor="#3A8D7A"/>
+
+			<!-- Card de Histórico (Mock visual) -->
+			<Border Stroke="#E2E8F0" BackgroundColor="#FFFFFF" Padding="15" StrokeShape="RoundRectangle 8">
+				<VerticalStackLayout Spacing="5">
+
+					<!-- CORREÇÃO AQUI: Usando Grid para separar os textos nas extremidades -->
+					<Grid ColumnDefinitions="*, Auto">
+						<Label Grid.Column="0" Text="Thor" FontAttributes="Bold" FontSize="18" TextColor="#263238"/>
+						<Label Grid.Column="1" Text="Confirmado" TextColor="#3A9D5D" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+					</Grid>
+
+					<Label Text="Banho + Tosa" TextColor="#718096" FontSize="14"/>
+
+					<HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+						<Label Text="📅 28/08/2026" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
+						<Label Text="⏰ 10:30" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
+					</HorizontalStackLayout>
+				</VerticalStackLayout>
+			</Border>
+
+		</VerticalStackLayout>
+	</ScrollView>
+</ContentPage>
