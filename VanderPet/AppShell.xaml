@@ -4,29 +4,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:VanderPet.Views"
-    Title="VanderPet"
-    Shell.NavBarIsVisible="False">
-
-	<Shell.Resources>
-		<Style TargetType="TabBar">
-			<Setter Property="Shell.TabBarBackgroundColor" Value="#FFFFFF" />
-			<Setter Property="Shell.TabBarTitleColor" Value="#718096" />
-			<Setter Property="Shell.TabBarUnselectedColor" Value="#718096" />
-		</Style>
-	</Shell.Resources>
+    Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarBackgroundColor="#FFFFFF"
+    Shell.TabBarTitleColor="#3A8D7A"
+    Shell.TabBarUnselectedColor="#718096">
 
 	<TabBar>
-		<Tab Title="Agendar">
-			<ShellContent ContentTemplate="{DataTemplate views:AgendamentoPage}" />
-		</Tab>
-
-		<!-- NOVA ABA: Gerenciamento de Pets -->
-		<Tab Title="Meus Pets">
-			<ShellContent ContentTemplate="{DataTemplate views:PetsPage}" />
-		</Tab>
-
-		<Tab Title="Histórico">
+		<!-- Aba 1: A tela principal exigida pelo fluxo -->
+		<Tab Title="Agendamentos" >
 			<ShellContent ContentTemplate="{DataTemplate views:HistoricoPage}" />
+		</Tab>
+
+		<!-- Aba 2: Lista de Pets -->
+		<Tab Title="Meus Pets" >
+			<ShellContent ContentTemplate="{DataTemplate views:PetsPage}" />
 		</Tab>
 	</TabBar>
 

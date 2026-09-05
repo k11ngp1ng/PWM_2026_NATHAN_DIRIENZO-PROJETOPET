@@ -2,32 +2,50 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="VanderPet.Views.HistoricoPage"
-             BackgroundColor="#F7F9F8">
+             xmlns:models="clr-namespace:VanderPet.Models"
+             BackgroundColor="#F7F9F8"
+             Title="Meus Agendamentos"
+             Shell.NavBarIsVisible="False" 
+             NavigationPage.HasNavigationBar="False">
 
-	<ScrollView>
-		<VerticalStackLayout Padding="20,40,20,40" Spacing="20">
+	<VerticalStackLayout Padding="20,40,20,0" Spacing="20">
 
-			<Label Text="Histórico" FontSize="26" FontAttributes="Bold" TextColor="#3A8D7A"/>
+		<!-- Título customizado que você já possui, por isso não precisamos da barra preta -->
+		<Label Text="Agendamentos" FontSize="26" FontAttributes="Bold" TextColor="#3A8D7A"/>
 
-			<!-- Card de Histórico (Mock visual) -->
-			<Border Stroke="#E2E8F0" BackgroundColor="#FFFFFF" Padding="15" StrokeShape="RoundRectangle 8">
-				<VerticalStackLayout Spacing="5">
+		<Button Text="+ Novo Agendamento" 
+                BackgroundColor="#3A8D7A" 
+                TextColor="White" 
+                FontAttributes="Bold" 
+                CornerRadius="8" 
+                HeightRequest="50" 
+                Clicked="OnNovoAgendamentoClicked"/>
 
-					<!-- CORREÇÃO AQUI: Usando Grid para separar os textos nas extremidades -->
-					<Grid ColumnDefinitions="*, Auto">
-						<Label Grid.Column="0" Text="Thor" FontAttributes="Bold" FontSize="18" TextColor="#263238"/>
-						<Label Grid.Column="1" Text="Confirmado" TextColor="#3A9D5D" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
-					</Grid>
+		<CollectionView ItemsSource="{Binding ListaAgendamentos}">
+			<CollectionView.ItemTemplate>
+				<DataTemplate x:DataType="models:Agendamento">
+					<Border Stroke="#E2E8F0" BackgroundColor="#FFFFFF" Padding="15" StrokeShape="RoundRectangle 8" Margin="0,0,0,15">
+						<VerticalStackLayout Spacing="5">
+							<Grid ColumnDefinitions="*, Auto">
+								<Label Grid.Column="0" Text="{Binding Pet.Nome}" FontAttributes="Bold" FontSize="18" TextColor="#263238"/>
+								<Label Grid.Column="1" Text="{Binding Status}" TextColor="#3A9D5D" FontAttributes="Bold" FontSize="12" VerticalOptions="Center"/>
+							</Grid>
+							<Label Text="{Binding Servico.Servico}" TextColor="#718096" FontSize="14"/>
+							<HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
+								<Label Text="{Binding Data, StringFormat='📅 {0:dd/MM/yyyy}'}" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
+								<Label Text="{Binding Horario, StringFormat='⏰ {0:hh\\:mm}'}" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
+							</HorizontalStackLayout>
+						</VerticalStackLayout>
+					</Border>
+				</DataTemplate>
+			</CollectionView.ItemTemplate>
 
-					<Label Text="Banho + Tosa" TextColor="#718096" FontSize="14"/>
-
-					<HorizontalStackLayout Spacing="10" Margin="0,5,0,0">
-						<Label Text="📅 28/08/2026" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
-						<Label Text="⏰ 10:30" TextColor="#3A8D7A" FontAttributes="Bold" FontSize="14"/>
-					</HorizontalStackLayout>
+			<CollectionView.EmptyView>
+				<VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10" Margin="0,40,0,0">
+					<Label Text="Você ainda não possui agendamentos." TextColor="#718096" FontSize="16" HorizontalTextAlignment="Center"/>
 				</VerticalStackLayout>
-			</Border>
+			</CollectionView.EmptyView>
+		</CollectionView>
 
-		</VerticalStackLayout>
-	</ScrollView>
+	</VerticalStackLayout>
 </ContentPage>

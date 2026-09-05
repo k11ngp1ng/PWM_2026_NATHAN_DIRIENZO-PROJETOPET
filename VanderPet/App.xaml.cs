@@ -27,24 +27,55 @@ public partial class App : Application
 
 	public static List<Racas> lstRacas = new List<Racas>()
 	{
-        // ... (Para economizar espaço visual aqui no prompt, mantenha todas aquelas raças de 1 a 30 que criamos antes)
-        new Racas() { Id = 1, Raca = "SRD (Sem Raça Definida)", EspecieId = 1 },
-		new Racas() { Id = 11, Raca = "SRD (Sem Raça Definida)", EspecieId = 2 }
+		new Racas() { Id = 1, EspecieId = 1, Raca = "SRD (Sem Raça Definida)" },
+		new Racas() { Id = 2, EspecieId = 1, Raca = "Poodle" },
+		new Racas() { Id = 3, EspecieId = 1, Raca = "Pinscher" },
+		new Racas() { Id = 4, EspecieId = 1, Raca = "Shih Tzu" },
+		new Racas() { Id = 5, EspecieId = 1, Raca = "Yorkshire" },
+		new Racas() { Id = 6, EspecieId = 1, Raca = "Pug" },
+		new Racas() { Id = 7, EspecieId = 1, Raca = "Bulldog Francês" },
+		new Racas() { Id = 8, EspecieId = 1, Raca = "Golden Retriever" },
+		new Racas() { Id = 9, EspecieId = 1, Raca = "Labrador" },
+		new Racas() { Id = 10, EspecieId = 1, Raca = "Spitz Alemão" },
+		new Racas() { Id = 11, EspecieId = 1, Raca = "Pitbull" },
+		new Racas() { Id = 12, EspecieId = 1, Raca = "Border Collie" },
+
+		new Racas() { Id = 13, EspecieId = 2, Raca = "SRD (Sem Raça Definida)" },
+		new Racas() { Id = 14, EspecieId = 2, Raca = "Siamês" },
+		new Racas() { Id = 15, EspecieId = 2, Raca = "Persa" },
+		new Racas() { Id = 16, EspecieId = 2, Raca = "Maine Coon" },
+		new Racas() { Id = 17, EspecieId = 2, Raca = "Angorá" },
+		new Racas() { Id = 18, EspecieId = 2, Raca = "Sphynx" },
+		new Racas() { Id = 19, EspecieId = 2, Raca = "Bengal" },
+
+		new Racas() { Id = 20, EspecieId = 3, Raca = "Não se aplica / SRD" },
+		new Racas() { Id = 21, EspecieId = 3, Raca = "Calopsita" },
+		new Racas() { Id = 22, EspecieId = 3, Raca = "Papagaio" },
+		new Racas() { Id = 23, EspecieId = 3, Raca = "Canário" },
+
+		new Racas() { Id = 24, EspecieId = 4, Raca = "Não se aplica / SRD" },
+		new Racas() { Id = 25, EspecieId = 4, Raca = "Tartaruga" },
+		new Racas() { Id = 26, EspecieId = 4, Raca = "Iguana" },
+
+		new Racas() { Id = 27, EspecieId = 5, Raca = "Não se aplica / SRD" },
+		new Racas() { Id = 28, EspecieId = 5, Raca = "Coelho" },
+		new Racas() { Id = 29, EspecieId = 5, Raca = "Hamster" },
+		new Racas() { Id = 30, EspecieId = 5, Raca = "Porquinho da Índia" },
+
+		new Racas() { Id = 31, EspecieId = 6, Raca = "Não se aplica / SRD" }
 	};
 
-	public static System.Collections.ObjectModel.ObservableCollection<Pet> lstPets = new System.Collections.ObjectModel.ObservableCollection<Pet>()
+	public static ObservableCollection<Pet> lstPets = new ObservableCollection<Pet>()
 	{
 		new Pet() {
 			Id = 1,
 			Nome = "Thor",
 			Especie = lstEspecies[0],
 			Nascimento = new DateTime(2021, 5, 10),
-			Peso = 15.5,
-			Porte = "Médio"
+			Peso = 15.5
 		}
 	};
 
-	// NOVA LISTA GLOBAL: Para guardar o histórico de agendamentos
 	public static ObservableCollection<Agendamento> lstAgendamentos = new ObservableCollection<Agendamento>();
 
 	public App()
@@ -54,6 +85,15 @@ public partial class App : Application
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		return new Window(new NavigationPage(new LoginPage()));
+		// Cria a janela baseando-se na tela de Login inicial
+		var window = new Window(new NavigationPage(new LoginPage()));
+
+		// MÁGICA: Se o aplicativo estiver rodando no Windows (Desktop), forçamos o tamanho
+#if WINDOWS
+        window.Width = 420;  // Largura típica de smartphone
+        window.Height = 780; // Altura típica de smartphone
+#endif
+
+		return window;
 	}
 }

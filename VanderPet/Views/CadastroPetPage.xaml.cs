@@ -1,4 +1,7 @@
 using VanderPet.Models;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace VanderPet.Views;
 
@@ -11,7 +14,6 @@ public partial class CadastroPetPage : ContentPage
 		InitializeComponent();
 
 		pckEspecie.ItemsSource = App.lstEspecies;
-		pckRaca.ItemsSource = App.lstRacas;
 		dtpNascimento.MaximumDate = DateTime.Today;
 
 		_petEmEdicao = petParaEditar;
@@ -23,13 +25,17 @@ public partial class CadastroPetPage : ContentPage
 
 			entNome.Text = _petEmEdicao.Nome;
 			pckSexo.SelectedItem = _petEmEdicao.Sexo;
-			pckPorte.SelectedItem = _petEmEdicao.Porte; // Carrega o porte salvo
 			dtpNascimento.Date = _petEmEdicao.Nascimento;
 			entPeso.Text = _petEmEdicao.Peso.ToString();
 			edtObservacoes.Text = _petEmEdicao.Observacoes;
 
 			pckEspecie.SelectedItem = App.lstEspecies.FirstOrDefault(e => e.Id == _petEmEdicao.Especie?.Id);
-			pckRaca.SelectedItem = App.lstRacas.FirstOrDefault(r => r.Id == _petEmEdicao.Raca?.Id);
+
+			if (pckRaca.ItemsSource != null)
+			{
+				var listaRacasAtual = (IEnumerable<Racas>)pckRaca.ItemsSource;
+				pckRaca.SelectedItem = listaRacasAtual.FirstOrDefault(r => r.Id == _petEmEdicao.Raca?.Id);
+			}
 		}
 	}
 
@@ -39,24 +45,20 @@ public partial class CadastroPetPage : ContentPage
 		{
 			var racasFiltradas = App.lstRacas.Where(r => r.EspecieId == especieSelecionada.Id).ToList();
 			pckRaca.ItemsSource = racasFiltradas;
+			brdRaca.IsVisible = racasFiltradas.Count > 0;
 
-			if (especieSelecionada.Id == 1 || especieSelecionada.Id == 2)
+			if (racasFiltradas.Count == 1)
 			{
-				brdRaca.IsVisible = true;
-			}
-			else
-			{
-				brdRaca.IsVisible = false;
+				pckRaca.SelectedIndex = 0;
 			}
 		}
 	}
 
 	private async void OnSalvarClicked(object sender, EventArgs e)
 	{
-		// Tornamos o Porte obrigatório para a inteligência de negócios funcionar
-		if (string.IsNullOrWhiteSpace(entNome.Text) || pckEspecie.SelectedItem == null || pckPorte.SelectedItem == null)
+		if (string.IsNullOrWhiteSpace(entNome.Text) || pckEspecie.SelectedItem == null)
 		{
-			await DisplayAlertAsync("Atenção", "Por favor, informe pelo menos o Nome, Espécie e Porte do pet.", "OK");
+			await DisplayAlertAsync("Atenção", "Por favor, informe pelo menos o Nome e a Espécie do pet.", "OK");
 			return;
 		}
 
@@ -71,9 +73,8 @@ public partial class CadastroPetPage : ContentPage
 		{
 			_petEmEdicao.Nome = entNome.Text;
 			_petEmEdicao.Especie = (Especies)pckEspecie.SelectedItem;
-			_petEmEdicao.Raca = (Racas)pckRaca.SelectedItem;
+			_petEmEdicao.Raca = pckRaca.SelectedItem as Racas;
 			_petEmEdicao.Sexo = pckSexo.SelectedItem?.ToString();
-			_petEmEdicao.Porte = pckPorte.SelectedItem?.ToString(); // Salva a edição do porte
 			_petEmEdicao.Nascimento = Convert.ToDateTime(dtpNascimento.Date);
 			_petEmEdicao.Peso = peso;
 			_petEmEdicao.Observacoes = edtObservacoes.Text ?? string.Empty;
@@ -87,9 +88,8 @@ public partial class CadastroPetPage : ContentPage
 				Id = App.lstPets.Count + 1,
 				Nome = entNome.Text,
 				Especie = (Especies)pckEspecie.SelectedItem,
-				Raca = (Racas)pckRaca.SelectedItem,
+				Raca = pckRaca.SelectedItem as Racas,
 				Sexo = pckSexo.SelectedItem?.ToString(),
-				Porte = pckPorte.SelectedItem?.ToString(), // Salva o novo porte
 				Nascimento = Convert.ToDateTime(dtpNascimento.Date),
 				Peso = peso,
 				Observacoes = edtObservacoes.Text ?? string.Empty
@@ -99,11 +99,13 @@ public partial class CadastroPetPage : ContentPage
 			await DisplayAlertAsync("Sucesso", $"{novoPet.Nome} foi cadastrado com sucesso!", "OK");
 		}
 
-		await Navigation.PopModalAsync();
+		// CORREÇÃO: Usando a navegação padrão para fechar a tela corretamente
+		await Navigation.PopAsync();
 	}
 
 	private async void OnCancelarClicked(object sender, EventArgs e)
 	{
-		await Navigation.PopModalAsync();
+		// CORREÇÃO: Usando a navegação padrão para cancelar e voltar
+		await Navigation.PopAsync();
 	}
 }

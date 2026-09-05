@@ -17,21 +17,14 @@
 			</Border>
 
 			<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
-				<Picker x:Name="pckEspecie" 
-                        Title="Selecione a Espécie" 
-                        ItemDisplayBinding="{Binding Especie}" 
-                        TextColor="#263238"
-                        SelectedIndexChanged="OnEspecieChanged"/>
+				<Picker x:Name="pckEspecie" Title="Selecione a Espécie" ItemDisplayBinding="{Binding Especie}" TextColor="#263238" SelectedIndexChanged="OnEspecieChanged"/>
 			</Border>
 
 			<Border x:Name="brdRaca" IsVisible="False" Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
-				<Picker x:Name="pckRaca" 
-                        Title="Selecione a Raça" 
-                        ItemDisplayBinding="{Binding Raca}" 
-                        TextColor="#263238"/>
+				<Picker x:Name="pckRaca" Title="Selecione a Raça" ItemDisplayBinding="{Binding Raca}" TextColor="#263238"/>
 			</Border>
 
-			<!-- NOVO GRID: Sexo e Porte Lado a Lado -->
+			<!-- Grid Reorganizado: Sexo e Nascimento -->
 			<Grid ColumnDefinitions="*, *" ColumnSpacing="15">
 				<VerticalStackLayout Grid.Column="0" Spacing="5">
 					<Label Text="Sexo" FontSize="12" TextColor="#718096" />
@@ -49,58 +42,28 @@
 				</VerticalStackLayout>
 
 				<VerticalStackLayout Grid.Column="1" Spacing="5">
-					<Label Text="Porte" FontSize="12" TextColor="#718096" />
-					<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
-						<Picker x:Name="pckPorte" Title="Selecione" TextColor="#263238">
-							<Picker.ItemsSource>
-								<x:Array Type="{x:Type x:String}">
-									<x:String>Pequeno</x:String>
-									<x:String>Médio</x:String>
-									<x:String>Grande</x:String>
-								</x:Array>
-							</Picker.ItemsSource>
-						</Picker>
-					</Border>
-				</VerticalStackLayout>
-			</Grid>
-
-			<Grid ColumnDefinitions="*, *" ColumnSpacing="15">
-				<VerticalStackLayout Grid.Column="0" Spacing="5">
 					<Label Text="Nascimento" FontSize="12" TextColor="#718096" />
 					<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
 						<DatePicker x:Name="dtpNascimento" Format="dd/MM/yyyy" TextColor="#263238" />
 					</Border>
 				</VerticalStackLayout>
-
-				<VerticalStackLayout Grid.Column="1" Spacing="5">
-					<Label Text="Peso (kg)" FontSize="12" TextColor="#718096" />
-					<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
-						<Entry x:Name="entPeso" Placeholder="Ex: 5.5" Keyboard="Numeric" TextColor="#263238" />
-					</Border>
-				</VerticalStackLayout>
 			</Grid>
 
+			<!-- Peso agora fica sozinho -->
+			<VerticalStackLayout Spacing="5">
+				<Label Text="Peso (kg)" FontSize="12" TextColor="#718096" />
+				<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,0">
+					<Entry x:Name="entPeso" Placeholder="Ex: 5.5" Keyboard="Numeric" TextColor="#263238" />
+				</Border>
+			</VerticalStackLayout>
+
 			<Border Stroke="#E2E8F0" StrokeThickness="1" BackgroundColor="#FFFFFF" StrokeShape="RoundRectangle 8" Padding="10,5">
-				<Editor x:Name="edtObservacoes" 
-                        Placeholder="Alguma observação importante?" 
-                        HeightRequest="80" 
-                        TextColor="#263238" />
+				<Editor x:Name="edtObservacoes" Placeholder="Alguma observação importante?" HeightRequest="80" TextColor="#263238" />
 			</Border>
 
 			<VerticalStackLayout Spacing="15" Margin="0,20,0,0">
-				<Button Text="SALVAR PET"
-                        BackgroundColor="#3A8D7A"
-                        TextColor="White"
-                        FontAttributes="Bold"
-                        CornerRadius="8"
-                        HeightRequest="50"
-                        Clicked="OnSalvarClicked"/>
-
-				<Button Text="CANCELAR"
-                        BackgroundColor="Transparent"
-                        TextColor="#718096"
-                        FontAttributes="Bold"
-                        Clicked="OnCancelarClicked"/>
+				<Button Text="SALVAR PET" BackgroundColor="#3A8D7A" TextColor="White" FontAttributes="Bold" CornerRadius="8" HeightRequest="50" Clicked="OnSalvarClicked"/>
+				<Button Text="CANCELAR" BackgroundColor="Transparent" TextColor="#718096" FontAttributes="Bold" Clicked="OnCancelarClicked"/>
 			</VerticalStackLayout>
 
 		</VerticalStackLayout>

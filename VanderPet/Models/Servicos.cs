@@ -1,22 +1,14 @@
-﻿namespace VanderPet.Models;
+﻿using System;
 
-// O serviço puro, como cadastrado no banco de dados do Pet Shop
+namespace VanderPet.Models;
+
 public class Servicos
 {
 	public int Id { get; set; }
 	public string Servico { get; set; } = string.Empty;
 	public string Descricao { get; set; } = string.Empty;
+
+	// Tempo e Preço base, antes de calcular o peso/porte do animal
 	public int DuracaoMinutosBase { get; set; }
 	public decimal PrecoBase { get; set; }
-}
-
-// DTO: Objeto temporário usado apenas para desenhar a tela com os valores já recalculados
-public class ServicoExibicao
-{
-	public int Id { get; set; }
-	public string Servico { get; set; } = string.Empty;
-	public string Descricao { get; set; } = string.Empty;
-	public decimal PrecoCalculado { get; set; }
-	public int DuracaoMinutosFinal { get; set; }
-	public string DuracaoFormatada { get; set; } = string.Empty;
 }
